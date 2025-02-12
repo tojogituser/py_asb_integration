@@ -1,0 +1,27 @@
+# Use a slim Python 3.9 image.
+FROM python:3.9-slim
+
+# Set the working directory inside the container.
+WORKDIR /app
+
+# Copy the global requirements file from the project root.
+COPY requirements.txt .
+
+# Upgrade pip and install global dependencies (including debugpy).
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
+# Copy the entire modules folder (which contains setup.py and the shared module).
+COPY modules ./modules
+
+# Copy the Orchestrator processor project files.
+COPY processors/Orchestrator/ .
+
+# Install the shared module in editable mode.
+RUN pip install -e ./modules
+
+# Expose the debug port.
+EXPOSE 5678
+
+# Start the application in debug mode.
+# - debugpy listens on 0.0.0.0:5678 and waits for the debugger to attach.
+CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "OrchestratorMain.py"]
