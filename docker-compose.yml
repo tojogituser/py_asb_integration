@@ -1,1 +1,27 @@
+version: '3.8'
+
+services:
+  orchestrator:
+    build:
+      context: .
+      dockerfile: processors/Orchestrator/Dockerfile
+    container_name: orchestrator_processor
+    command: python OrchestratorMain.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Optionally expose ports if your processor listens on any
+    # ports:
+    #   - "8001:8001"
+
+  taskx:
+    build:
+      context: .
+      dockerfile: processors/TaskX/Dockerfile
+    container_name: taskx_processor
+    command: python TaskXMain.py
+    environment:
+      - PYTHONUNBUFFERED=1
+    # Optionally expose ports if your processor listens on any
+    # ports:
+    #   - "8002:8002"
 
