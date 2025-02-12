@@ -1,0 +1,64 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Orchestrator Docker Image",
+            "type": "shell",
+            "command": "docker build -f processors/Orchestrator/Dockerfile -t orchestrator_processor .",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Build TaskX Docker Image",
+            "type": "shell",
+            "command": "docker build -f processors/TaskX/Dockerfile -t taskx_processor .",
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Run Orchestrator Locally",
+            "type": "shell",
+            "command": "python processors/Orchestrator/OrchestratorMain.py",
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run TaskX Locally",
+            "type": "shell",
+            "command": "python processors/TaskX/TaskXMain.py",
+            "group": "none",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Docker Compose Up",
+            "type": "shell",
+            "command": "docker-compose up --build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [],
+            "detail": "Builds and starts all services defined in docker-compose.yml"
+        },
+        {
+            "label": "Docker Compose Down",
+            "type": "shell",
+            "command": "docker-compose down",
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Stops and removes containers, networks, images, and volumes created by up"
+        }
+    ]
+}
