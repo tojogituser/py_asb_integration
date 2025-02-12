@@ -1,36 +1,53 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Orchestrator Locally",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/processors/Orchestrator/OrchestratorMain.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug TaskX Locally",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/processors/TaskX/TaskXMain.py",
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Attach to Orchestrator (Docker Debug)",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
         {
-            "name": "Debug Orchestrator Locally",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/processors/Orchestrator/OrchestratorMain.py",
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Debug TaskX Locally",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/processors/TaskX/TaskXMain.py",
-            "console": "integratedTerminal"
-        },
-        {
-            "name": "Attach to Docker Compose Orchestrator",
-            "type": "python",
-            "request": "attach",
-            "connect": {
-                "host": "localhost",
-                "port": 5678
-            },
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "/app"
-                }
-            ],
-            "preLaunchTask": "Docker Compose Up",
-            "postDebugTask": "Docker Compose Down"
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/app"
         }
-    ]
+      ],
+      "preLaunchTask": "Build Orchestrator Docker Image (Debug)",
+      "postDebugTask": "Docker Compose Down"
+    },
+    {
+      "name": "Attach to TaskX (Docker Debug)",
+      "type": "python",
+      "request": "attach",
+      "connect": {
+        "host": "localhost",
+        "port": 5678
+      },
+      "pathMappings": [
+        {
+          "localRoot": "${workspaceFolder}",
+          "remoteRoot": "/app"
+        }
+      ],
+      "preLaunchTask": "Build TaskX Docker Image (Debug)",
+      "postDebugTask": "Docker Compose Down"
+    }
+  ]
 }
