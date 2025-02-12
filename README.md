@@ -78,3 +78,5 @@ Double-Check Import Statements:
     In your processor code (e.g., OrchestratorMain.py), the import should be:
 
 from servicebus_consumer.consumer import ServiceBusConsumer
+docker build -f processors/Orchestrator/Dockerfile -t orchestrator_processor .
+docker build -f processors/Orchestrator/Dockerfile -t orchestrator_processor .
