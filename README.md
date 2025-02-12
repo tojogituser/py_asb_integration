@@ -80,3 +80,5 @@ Double-Check Import Statements:
 from servicebus_consumer.consumer import ServiceBusConsumer
 docker build -f processors/Orchestrator/Dockerfile -t orchestrator_processor .
 docker build -f processors/Orchestrator/Dockerfile -t orchestrator_processor .
+
+docker build -f processors/TaskX/Dockerfile -t taskx_processor .
