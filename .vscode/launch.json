@@ -29,8 +29,8 @@
           "remoteRoot": "/app"
         }
       ],
-      "preLaunchTask": "Build Orchestrator Docker Image (Debug)",
-      "postDebugTask": "Docker Compose Down"
+      "preLaunchTask": "Run Orchestrator Container (Debug)",
+      "postDebugTask": "Stop Orchestrator Container"
     },
     {
       "name": "Attach to TaskX (Docker Debug)",
@@ -46,8 +46,8 @@
           "remoteRoot": "/app"
         }
       ],
-      "preLaunchTask": "Build TaskX Docker Image (Debug)",
-      "postDebugTask": "Docker Compose Down"
+      "preLaunchTask": "Run TaskX Container (Debug)",
+      "postDebugTask": "Stop TaskX Container"
     }
   ]
 }
