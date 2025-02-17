@@ -2,20 +2,50 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Build Orchestrator Docker Image (Debug)",
+      "label": "Build Orchestrator Debug Image",
       "type": "shell",
       "command": "docker build -f processors/Orchestrator/Dockerfile.debug -t orchestrator_processor_debug .",
       "group": "build",
       "problemMatcher": [],
-      "detail": "Builds the Orchestrator image using the debug Dockerfile."
+      "detail": "Builds the Orchestrator image using Dockerfile.debug."
     },
     {
-      "label": "Build TaskX Docker Image (Debug)",
+      "label": "Run Orchestrator Container (Debug)",
+      "type": "shell",
+      "command": "docker run -d -p 5678:5678 --name orchestrator_debug_container orchestrator_processor_debug",
+      "dependsOn": "Build Orchestrator Debug Image",
+      "problemMatcher": [],
+      "detail": "Runs the Orchestrator container in detached mode with port 5678 mapped."
+    },
+    {
+      "label": "Stop Orchestrator Container",
+      "type": "shell",
+      "command": "docker rm -f orchestrator_debug_container",
+      "problemMatcher": [],
+      "detail": "Stops and removes the Orchestrator debug container."
+    },
+    {
+      "label": "Build TaskX Debug Image",
       "type": "shell",
       "command": "docker build -f processors/TaskX/Dockerfile.debug -t taskx_processor_debug .",
       "group": "build",
       "problemMatcher": [],
-      "detail": "Builds the TaskX image using the debug Dockerfile."
+      "detail": "Builds the TaskX image using Dockerfile.debug."
+    },
+    {
+      "label": "Run TaskX Container (Debug)",
+      "type": "shell",
+      "command": "docker run -d -p 5678:5678 --name taskx_debug_container taskx_processor_debug",
+      "dependsOn": "Build TaskX Debug Image",
+      "problemMatcher": [],
+      "detail": "Runs the TaskX container in detached mode with port 5678 mapped."
+    },
+    {
+      "label": "Stop TaskX Container",
+      "type": "shell",
+      "command": "docker rm -f taskx_debug_container",
+      "problemMatcher": [],
+      "detail": "Stops and removes the TaskX debug container."
     },
     {
       "label": "Docker Compose Up (Release)",
